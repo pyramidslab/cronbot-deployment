@@ -13,11 +13,10 @@ services:
             - mongodb
         environment:
             - MONGO_HOST=mongodb://localhost:27017
-            - MONGO_DB=test
-            - NEW_USER_PASSWORD=987654
-            - ACCESS_TOKEN_TIMEOUT=30
+            - MONGO_DB=test            
         ports:
             - 8080:8080
+        # Optional to replace application.yml file
         volumes: 
          - ./core-server:/config
     mq:

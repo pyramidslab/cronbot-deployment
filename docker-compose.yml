@@ -1,0 +1,26 @@
+version: "3"
+services:
+    mongodb:
+        image: mongo
+        restart: always
+        volumes:
+            - ./data:/data/db
+        ports:
+            - 27017:27017
+    coreserver:
+        image: pyramidslab/cronbot-core
+        depends_on:
+            - mongodb
+        environment:
+            - MONGO_HOST=mongodb://localhost:27017
+            - MONGO_DB=test
+            - NEW_USER_PASSWORD=987654
+            - ACCESS_TOKEN_TIMEOUT=30
+        ports:
+            - 8080:8080
+        volumes: 
+         - ./core-server:/config
+    mq:
+        image: rabbitmq:3-management
+        volumes: 
+         - ./mq:/var/lib/rabbitmq/mnesia

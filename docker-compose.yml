@@ -21,5 +21,7 @@ services:
          - ./core-server:/config
     mq:
         image: rabbitmq:3-management
+        ports: 
+            - 5672:5672
         volumes: 
          - ./mq:/var/lib/rabbitmq/mnesia
